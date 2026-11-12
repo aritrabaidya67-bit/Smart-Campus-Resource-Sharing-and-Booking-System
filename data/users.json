@@ -1,0 +1,272 @@
+[
+  {
+    "user_id": "USR0001",
+    "name": "Aarav Sharma",
+    "user_type": "Student",
+    "department": "Computer Science",
+    "semester": "2",
+    "contact_number": "9876500001",
+    "email": "user1@campus.edu"
+  },
+  {
+    "user_id": "USR0002",
+    "name": "Priya Patel",
+    "user_type": "Student",
+    "department": "Electronics",
+    "semester": "3",
+    "contact_number": "9876500002",
+    "email": "user2@campus.edu"
+  },
+  {
+    "user_id": "USR0003",
+    "name": "Rohan Gupta",
+    "user_type": "Student",
+    "department": "Mechanical",
+    "semester": "4",
+    "contact_number": "9876500003",
+    "email": "user3@campus.edu"
+  },
+  {
+    "user_id": "USR0004",
+    "name": "Sneha Reddy",
+    "user_type": "Student",
+    "department": "Civil",
+    "semester": "5",
+    "contact_number": "9876500004",
+    "email": "user4@campus.edu"
+  },
+  {
+    "user_id": "USR0005",
+    "name": "Vikram Singh",
+    "user_type": "Student",
+    "department": "Mathematics",
+    "semester": "6",
+    "contact_number": "9876500005",
+    "email": "user5@campus.edu"
+  },
+  {
+    "user_id": "USR0006",
+    "name": "Ananya Das",
+    "user_type": "Student",
+    "department": "Physics",
+    "semester": "7",
+    "contact_number": "9876500006",
+    "email": "user6@campus.edu"
+  },
+  {
+    "user_id": "USR0007",
+    "name": "Arjun Kumar",
+    "user_type": "Student",
+    "department": "Chemistry",
+    "semester": "8",
+    "contact_number": "9876500007",
+    "email": "user7@campus.edu"
+  },
+  {
+    "user_id": "USR0008",
+    "name": "Kavya Nair",
+    "user_type": "Student",
+    "department": "English",
+    "semester": "1",
+    "contact_number": "9876500008",
+    "email": "user8@campus.edu"
+  },
+  {
+    "user_id": "USR0009",
+    "name": "Rahul Verma",
+    "user_type": "Student",
+    "department": "Computer Science",
+    "semester": "2",
+    "contact_number": "9876500009",
+    "email": "user9@campus.edu"
+  },
+  {
+    "user_id": "USR0010",
+    "name": "Ishita Joshi",
+    "user_type": "Student",
+    "department": "Electronics",
+    "semester": "3",
+    "contact_number": "9876500010",
+    "email": "user10@campus.edu"
+  },
+  {
+    "user_id": "USR0011",
+    "name": "Aditya Rao",
+    "user_type": "Student",
+    "department": "Mechanical",
+    "semester": "4",
+    "contact_number": "9876500011",
+    "email": "user11@campus.edu"
+  },
+  {
+    "user_id": "USR0012",
+    "name": "Meera Iyer",
+    "user_type": "Student",
+    "department": "Civil",
+    "semester": "5",
+    "contact_number": "9876500012",
+    "email": "user12@campus.edu"
+  },
+  {
+    "user_id": "USR0013",
+    "name": "Siddharth Kapoor",
+    "user_type": "Student",
+    "department": "Mathematics",
+    "semester": "6",
+    "contact_number": "9876500013",
+    "email": "user13@campus.edu"
+  },
+  {
+    "user_id": "USR0014",
+    "name": "Divya Menon",
+    "user_type": "Student",
+    "department": "Physics",
+    "semester": "7",
+    "contact_number": "9876500014",
+    "email": "user14@campus.edu"
+  },
+  {
+    "user_id": "USR0015",
+    "name": "Nikhil Sahu",
+    "user_type": "Student",
+    "department": "Chemistry",
+    "semester": "8",
+    "contact_number": "9876500015",
+    "email": "user15@campus.edu"
+  },
+  {
+    "user_id": "USR0016",
+    "name": "Riya Choudhury",
+    "user_type": "Student",
+    "department": "English",
+    "semester": "1",
+    "contact_number": "9876500016",
+    "email": "user16@campus.edu"
+  },
+  {
+    "user_id": "USR0017",
+    "name": "Karthik Bhat",
+    "user_type": "Student",
+    "department": "Computer Science",
+    "semester": "2",
+    "contact_number": "9876500017",
+    "email": "user17@campus.edu"
+  },
+  {
+    "user_id": "USR0018",
+    "name": "Pooja Saxena",
+    "user_type": "Student",
+    "department": "Electronics",
+    "semester": "3",
+    "contact_number": "9876500018",
+    "email": "user18@campus.edu"
+  },
+  {
+    "user_id": "USR0019",
+    "name": "Manish Tiwari",
+    "user_type": "Student",
+    "department": "Mechanical",
+    "semester": "4",
+    "contact_number": "9876500019",
+    "email": "user19@campus.edu"
+  },
+  {
+    "user_id": "USR0020",
+    "name": "Shreya Bhatt",
+    "user_type": "Student",
+    "department": "Civil",
+    "semester": "5",
+    "contact_number": "9876500020",
+    "email": "user20@campus.edu"
+  },
+  {
+    "user_id": "USR0021",
+    "name": "Deepak Pandey",
+    "user_type": "Student",
+    "department": "Mathematics",
+    "semester": "6",
+    "contact_number": "9876500021",
+    "email": "user21@campus.edu"
+  },
+  {
+    "user_id": "USR0022",
+    "name": "Neha Kulkarni",
+    "user_type": "Student",
+    "department": "Physics",
+    "semester": "7",
+    "contact_number": "9876500022",
+    "email": "user22@campus.edu"
+  },
+  {
+    "user_id": "USR0023",
+    "name": "Dr. Rajesh Mishra",
+    "user_type": "Teacher",
+    "department": "Chemistry",
+    "semester": "",
+    "contact_number": "9876500023",
+    "email": "user23@campus.edu"
+  },
+  {
+    "user_id": "USR0024",
+    "name": "Dr. Sunita Devi",
+    "user_type": "Teacher",
+    "department": "English",
+    "semester": "",
+    "contact_number": "9876500024",
+    "email": "user24@campus.edu"
+  },
+  {
+    "user_id": "USR0025",
+    "name": "Prof. Amit Agarwal",
+    "user_type": "Teacher",
+    "department": "Computer Science",
+    "semester": "",
+    "contact_number": "9876500025",
+    "email": "user25@campus.edu"
+  },
+  {
+    "user_id": "USR0026",
+    "name": "Dr. Lakshmi Rao",
+    "user_type": "Teacher",
+    "department": "Electronics",
+    "semester": "",
+    "contact_number": "9876500026",
+    "email": "user26@campus.edu"
+  },
+  {
+    "user_id": "USR0027",
+    "name": "Prof. Suresh Mehta",
+    "user_type": "Teacher",
+    "department": "Mechanical",
+    "semester": "",
+    "contact_number": "9876500027",
+    "email": "user27@campus.edu"
+  },
+  {
+    "user_id": "USR0028",
+    "name": "Dr. Kavitha Rajan",
+    "user_type": "Teacher",
+    "department": "Civil",
+    "semester": "",
+    "contact_number": "9876500028",
+    "email": "user28@campus.edu"
+  },
+  {
+    "user_id": "USR0029",
+    "name": "Prof. Mohan Das",
+    "user_type": "Teacher",
+    "department": "Mathematics",
+    "semester": "",
+    "contact_number": "9876500029",
+    "email": "user29@campus.edu"
+  },
+  {
+    "user_id": "USR0030",
+    "name": "Dr. Anjali Srinivasan",
+    "user_type": "Teacher",
+    "department": "Physics",
+    "semester": "",
+    "contact_number": "9876500030",
+    "email": "user30@campus.edu"
+  }
+]

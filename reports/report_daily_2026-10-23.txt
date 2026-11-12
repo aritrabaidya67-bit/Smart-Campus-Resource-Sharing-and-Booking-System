@@ -1,0 +1,68 @@
+============================================================
+SMART CAMPUS RESOURCE SHARING - RESOURCE REPORT
+============================================================
+Report Generated: 2026-11-12 14:24:49
+Filter Applied: Daily: 2026-10-23
+------------------------------------------------------------
+Total Resources: 24
+Available Resources: 24
+Booked Resources in Period: 1
+Booked Units in Period: 1
+Cancelled Bookings: 0
+Completed Bookings: 1
+Most Frequently Booked: Canon Camera Kit (1 bookings)
+Most Active User: Meera Iyer (1 bookings)
+Most Used Location: Arts Block (1 bookings)
+Total Booking Hours: 2.0
+------------------------------------------------------------
+CATEGORY-WISE STATISTICS:
+------------------------------------------------------------
+  Projector:
+    Total Units: 5
+    Available: 5
+    Booked Units in Period: 0
+  Laptop:
+    Total Units: 18
+    Available: 18
+    Booked Units in Period: 0
+  Microphone:
+    Total Units: 8
+    Available: 8
+    Booked Units in Period: 0
+  Camera:
+    Total Units: 3
+    Available: 3
+    Booked Units in Period: 1
+  Speaker:
+    Total Units: 10
+    Available: 10
+    Booked Units in Period: 0
+  Seminar Hall:
+    Total Units: 2
+    Available: 2
+    Booked Units in Period: 0
+  Classroom:
+    Total Units: 3
+    Available: 3
+    Booked Units in Period: 0
+  Computer Laboratory:
+    Total Units: 2
+    Available: 2
+    Booked Units in Period: 0
+  Whiteboard:
+    Total Units: 9
+    Available: 9
+    Booked Units in Period: 0
+  Extension Board:
+    Total Units: 15
+    Available: 15
+    Booked Units in Period: 0
+  Sports Kit:
+    Total Units: 11
+    Available: 11
+    Booked Units in Period: 0
+  Tripod:
+    Total Units: 5
+    Available: 5
+    Booked Units in Period: 0
+============================================================
