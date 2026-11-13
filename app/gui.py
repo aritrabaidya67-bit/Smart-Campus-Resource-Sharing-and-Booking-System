@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from datetime import datetime
+from pathlib import Path
 
 from app.config import (
     VALID_CONDITIONS, VALID_AVAILABILITY, VALID_USER_TYPES,
@@ -18,7 +19,7 @@ from app.resource_service import (
     add_resource, display_resources, validate_resource_data,
     search_resource, search_resource_recursively,
     register_user, display_users, get_next_resource_id, get_next_user_id,
-    validate_user_data, delete_resource, delete_user
+    validate_user_data, delete_resource, delete_user, update_resource_status
 )
 from app.booking_service import (
     book_resource, cancel_booking, display_user_bookings,
@@ -39,6 +40,11 @@ class CampusBookingApp:
         self.root.title("Smart Campus Resource Sharing and Booking System")
         self.root.geometry("1100x700")
         self.root.minsize(900, 600)
+
+        logo_path = Path(__file__).resolve().parent.parent / "logo" / "Campus Booking Calendar Icon.png"
+        if logo_path.exists():
+            self._app_icon = tk.PhotoImage(file=str(logo_path))
+            self.root.iconphoto(True, self._app_icon)
 
         self._load_errors = set()
         self.resources = self._load_data(load_resources_from_file, "resources")
@@ -111,6 +117,7 @@ class CampusBookingApp:
             ("Dashboard", self._show_dashboard),
             ("Add Resource", self._show_add_resource),
             ("Display Resources", self._show_display_resources),
+            ("Update Resource Status", self._show_update_resource_status),
             ("Register User", self._show_register_user),
             ("Display Users", self._show_display_users),
             ("Book Resource", self._show_book_resource),
@@ -357,6 +364,99 @@ class CampusBookingApp:
                 messagebox.showerror("Error", msg)
 
         ttk.Button(btn_frame, text="Delete Selected Resource", command=do_delete, style="Accent.TButton").pack(side=tk.RIGHT, padx=5)
+
+    def _show_update_resource_status(self):
+        self._clear_content()
+        frame = ttk.LabelFrame(self.content_frame, text="Update Resource Status", padding=15)
+        frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        if not self.resources:
+            ttk.Label(frame, text="No resources available.", font=("Segoe UI", 11)).pack(pady=20)
+            return
+
+        resource_display = [
+            f"{r.get('resource_id')} - {r.get('name')} ({r.get('category')})"
+            for r in self.resources if isinstance(r, dict)
+        ]
+
+        ttk.Label(frame, text="Select Resource:").grid(row=0, column=0, sticky=tk.W, pady=3)
+        res_var = tk.StringVar()
+        res_combo = ttk.Combobox(frame, textvariable=res_var, values=resource_display, width=45, state="readonly")
+        res_combo.grid(row=0, column=1, pady=3, padx=5)
+
+        info_frame = ttk.LabelFrame(frame, text="Current Status", padding=10)
+        info_frame.grid(row=1, column=0, columnspan=2, sticky="ew", pady=10, padx=5)
+
+        current_avail_label = ttk.Label(info_frame, text="Availability: -")
+        current_avail_label.grid(row=0, column=0, sticky=tk.W, padx=10, pady=2)
+        current_qty_label = ttk.Label(info_frame, text="Quantity: -")
+        current_qty_label.grid(row=0, column=1, sticky=tk.W, padx=10, pady=2)
+        current_cond_label = ttk.Label(info_frame, text="Condition: -")
+        current_cond_label.grid(row=0, column=2, sticky=tk.W, padx=10, pady=2)
+        current_bookings_label = ttk.Label(info_frame, text="Active Bookings: -")
+        current_bookings_label.grid(row=0, column=3, sticky=tk.W, padx=10, pady=2)
+
+        ttk.Label(frame, text="New Availability:").grid(row=2, column=0, sticky=tk.W, pady=3)
+        avail_var = tk.StringVar()
+        ttk.Combobox(frame, textvariable=avail_var, values=VALID_AVAILABILITY, width=28, state="readonly").grid(row=2, column=1, pady=3, padx=5)
+
+        ttk.Label(frame, text="New Quantity:").grid(row=3, column=0, sticky=tk.W, pady=3)
+        qty_var = tk.StringVar()
+        ttk.Entry(frame, textvariable=qty_var, width=30).grid(row=3, column=1, pady=3, padx=5)
+
+        ttk.Label(frame, text="New Condition:").grid(row=4, column=0, sticky=tk.W, pady=3)
+        cond_var = tk.StringVar()
+        ttk.Combobox(frame, textvariable=cond_var, values=VALID_CONDITIONS, width=28, state="readonly").grid(row=4, column=1, pady=3, padx=5)
+
+        def on_resource_selected(event=None):
+            sel = res_var.get()
+            if not sel:
+                return
+            resource_id = sel.split(" - ")[0].strip()
+            resource = search_resource_recursively(self.resources, 0, resource_id)
+            if resource is None:
+                return
+            current_avail_label.config(text=f"Availability: {resource.get('availability', '-')}")
+            current_qty_label.config(text=f"Quantity: {resource.get('quantity', '-')}")
+            current_cond_label.config(text=f"Condition: {resource.get('condition', '-')}")
+            active_count = sum(
+                1 for b in self.bookings
+                if isinstance(b, dict) and b.get("resource_id") == resource_id and b.get("status") in ACTIVE_STATUSES
+            )
+            current_bookings_label.config(text=f"Active Bookings: {active_count}")
+            avail_var.set(resource.get("availability", ""))
+            qty_var.set(str(resource.get("quantity", "")))
+            cond_var.set(resource.get("condition", ""))
+
+        res_combo.bind("<<ComboboxSelected>>", on_resource_selected)
+
+        def submit():
+            sel = res_var.get()
+            if not sel:
+                messagebox.showerror("Error", "Please select a resource.")
+                return
+            resource_id = sel.split(" - ")[0].strip()
+            new_avail = avail_var.get().strip() or None
+            new_qty = qty_var.get().strip() or None
+            new_cond = cond_var.get().strip() or None
+            if new_avail is None and new_qty is None and new_cond is None:
+                messagebox.showerror("Error", "Please set at least one field to update.")
+                return
+            success, message = update_resource_status(
+                self.resources, self.bookings, resource_id,
+                new_availability=new_avail,
+                new_quantity=new_qty,
+                new_condition=new_cond
+            )
+            if success:
+                if not self._save_all_data():
+                    return
+                messagebox.showinfo("Success", message)
+                self._show_update_resource_status()
+            else:
+                messagebox.showerror("Error", message)
+
+        ttk.Button(frame, text="Update Resource", command=submit, style="Accent.TButton").grid(row=5, column=0, columnspan=2, pady=15)
 
     def _show_register_user(self):
         self._clear_content()

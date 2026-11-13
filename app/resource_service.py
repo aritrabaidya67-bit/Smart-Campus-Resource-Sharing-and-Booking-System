@@ -5,6 +5,7 @@ from app.config import (
     VALID_USER_TYPES,
     RESOURCE_CATEGORIES,
     CAMPUS_LOCATIONS,
+    ACTIVE_STATUSES,
 )
 from app.models import Resource, User
 
@@ -266,3 +267,94 @@ def get_next_user_id(users):
         except (ValueError, AttributeError):
             pass
     return f"USR{max_num + 1:04d}"
+
+
+def update_resource_status(resources, bookings, resource_id, new_availability=None, new_quantity=None, new_condition=None):
+    if not isinstance(resources, list) or not isinstance(bookings, list):
+        return False, "Resources and bookings must be lists."
+
+    resource = None
+    for r in resources:
+        if isinstance(r, dict) and r.get("resource_id") == resource_id:
+            resource = r
+            break
+    if resource is None:
+        return False, f"Resource ID '{resource_id}' not found."
+
+    changes = []
+    errors = []
+
+    if new_availability is not None:
+        if new_availability not in VALID_AVAILABILITY:
+            errors.append(f"Availability must be one of: {', '.join(VALID_AVAILABILITY)}.")
+
+    if new_condition is not None:
+        if new_condition not in VALID_CONDITIONS:
+            errors.append(f"Condition must be one of: {', '.join(VALID_CONDITIONS)}.")
+
+    if new_quantity is not None:
+        qty = _integer_value(new_quantity)
+        if qty is None:
+            errors.append("Quantity must be a valid positive integer.")
+        elif qty < 1:
+            errors.append("Quantity must be a positive integer.")
+
+    effective_condition = new_condition if new_condition is not None else resource.get("condition", "")
+    effective_availability = new_availability if new_availability is not None else resource.get("availability", "")
+
+    if effective_condition == "Under Repair" and effective_availability == "Available":
+        errors.append("A resource under repair must be marked as Unavailable.")
+
+    if errors:
+        return False, "\n".join(errors)
+
+    has_active_bookings = any(
+        isinstance(b, dict) and b.get("resource_id") == resource_id and b.get("status") in ACTIVE_STATUSES
+        for b in bookings
+    )
+
+    if new_availability is not None and new_availability == "Unavailable" and has_active_bookings:
+        errors.append("Cannot mark as Unavailable: resource has active bookings (Confirmed or Pending).")
+
+    if new_condition is not None and new_condition == "Under Repair" and has_active_bookings:
+        errors.append("Cannot mark as Under Repair: resource has active bookings (Confirmed or Pending).")
+
+    if new_quantity is not None:
+        qty = _integer_value(new_quantity)
+        from app.booking_service import _get_peak_usage
+        for b in bookings:
+            if not isinstance(b, dict) or b.get("resource_id") != resource_id:
+                continue
+            if b.get("status") not in ACTIVE_STATUSES:
+                continue
+            peak = _get_peak_usage(
+                bookings, resource_id,
+                b.get("booking_date", ""), b.get("start_time", ""), b.get("end_time", "")
+            )
+            if peak > qty:
+                errors.append(
+                    f"Cannot reduce quantity to {qty}: active bookings require at least {peak} units."
+                )
+                break
+
+    if errors:
+        return False, "\n".join(errors)
+
+    if new_availability is not None and resource.get("availability") != new_availability:
+        changes.append(f"Availability: {resource.get('availability')} → {new_availability}")
+        resource["availability"] = new_availability
+
+    if new_quantity is not None:
+        qty = _integer_value(new_quantity)
+        if resource.get("quantity") != qty:
+            changes.append(f"Quantity: {resource.get('quantity')} → {qty}")
+            resource["quantity"] = qty
+
+    if new_condition is not None and resource.get("condition") != new_condition:
+        changes.append(f"Condition: {resource.get('condition')} → {new_condition}")
+        resource["condition"] = new_condition
+
+    if not changes:
+        return False, "No changes were made. The values are the same as current."
+
+    return True, "Resource updated successfully.\n" + "\n".join(changes)

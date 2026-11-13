@@ -224,7 +224,7 @@
     "end_time": "16:00",
     "purpose": "Badminton tournament",
     "quantity_requested": 1,
-    "status": "Confirmed",
+    "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
   },
   {
@@ -236,7 +236,7 @@
     "end_time": "12:00",
     "purpose": "Department meeting",
     "quantity_requested": 1,
-    "status": "Confirmed",
+    "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
   },
   {
