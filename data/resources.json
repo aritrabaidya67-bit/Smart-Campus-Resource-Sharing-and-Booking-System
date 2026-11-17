@@ -17,9 +17,9 @@
     "category": "Laptop",
     "location": "IT Center",
     "quantity": 10,
-    "condition": "Good",
+    "condition": "New",
     "availability": "Available",
-    "booking_count": 4,
+    "booking_count": 5,
     "brand": "Dell",
     "model_number": "Latitude 5520"
   },

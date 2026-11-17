@@ -235,23 +235,6 @@ def check_booking_conflict(bookings, resource_id, booking_date, start_time, end_
     return False, ""
 
 
-def _check_user_overlap(bookings, user_id, booking_date, start_time, end_time, exclude_booking_id=None):
-    for b in bookings:
-        if not isinstance(b, dict):
-            continue
-        bid = b.get("booking_id", "")
-        if exclude_booking_id and bid == exclude_booking_id:
-            continue
-        if b.get("status") not in ACTIVE_STATUSES:
-            continue
-        if b.get("user_id") != user_id:
-            continue
-        if b.get("booking_date") != booking_date:
-            continue
-        if _bookings_overlap(start_time, end_time, b.get("start_time", ""), b.get("end_time", "")):
-            return True, f"User already has an overlapping booking (ID: {bid}) at this time."
-    return False, ""
-
 
 def book_resource(resources, users, bookings, booking_attempts, booking_data):
     if not isinstance(booking_data, dict):
@@ -377,12 +360,6 @@ def book_resource(resources, users, bookings, booking_attempts, booking_data):
         booking_attempts.append(attempt_record)
         return False, "Conflict", conflict_msg
 
-    user_overlap, user_msg = _check_user_overlap(bookings, user_id, booking_date, start_time, end_time)
-    if user_overlap:
-        attempt_record["status"] = check_booking_status(True, True, True)
-        booking_attempts.append(attempt_record)
-        return False, "Conflict", user_msg
-
     status = check_booking_status(
         resource_available=True,
         conflict=False,
@@ -503,14 +480,6 @@ def update_booking_status(bookings, resources, users, booking_id, new_status):
         )
         if has_conflict:
             return False, f"Cannot reactivate: {conflict_msg}"
-
-        user_overlap, user_msg = _check_user_overlap(
-            bookings, booking.get("user_id", ""),
-            booking.get("booking_date", ""), booking.get("start_time", ""),
-            booking.get("end_time", ""), exclude_booking_id=booking_id
-        )
-        if user_overlap:
-            return False, f"Cannot reactivate: {user_msg}"
 
     booking["status"] = new_status
     sync_booking_counts(resources, bookings)

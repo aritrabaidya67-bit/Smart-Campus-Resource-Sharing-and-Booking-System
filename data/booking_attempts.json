@@ -382,5 +382,41 @@
     "quantity_requested": 1,
     "status": "Invalid",
     "created_at": "2026-11-07 12:13:37"
+  },
+  {
+    "booking_id": "BA0033",
+    "user_id": "USR0001",
+    "resource_id": "RES0024",
+    "booking_date": "2026-11-18",
+    "start_time": "09:00",
+    "end_time": "10:00",
+    "purpose": "for work",
+    "quantity_requested": 1,
+    "status": "Conflict",
+    "created_at": "2026-11-17 10:20:41"
+  },
+  {
+    "booking_id": "BA0034",
+    "user_id": "USR0001",
+    "resource_id": "RES0023",
+    "booking_date": "2026-11-18",
+    "start_time": "09:00",
+    "end_time": "10:00",
+    "purpose": "for work",
+    "quantity_requested": 1,
+    "status": "Conflict",
+    "created_at": "2026-11-17 10:20:56"
+  },
+  {
+    "booking_id": "BA0035",
+    "user_id": "USR0001",
+    "resource_id": "RES0020",
+    "booking_date": "2026-11-18",
+    "start_time": "09:00",
+    "end_time": "10:00",
+    "purpose": "for work",
+    "quantity_requested": 1,
+    "status": "Conflict",
+    "created_at": "2026-11-17 10:21:06"
   }
 ]

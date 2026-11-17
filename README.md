@@ -21,7 +21,7 @@
 - **User Management** — Register students and teachers with full validation (email, contact, semester)
 - **Resource Management** — Add resources across 12 categories and 10 campus locations
 - **Update Resource Status** — Change availability, quantity, and condition of any resource with business-rule enforcement
-- **Smart Booking** — Book resources with full conflict detection, capacity management, and user overlap prevention
+- **Smart Booking** — Book resources with full conflict detection and per-resource capacity management
 - **Availability Checker** — Check real-time availability for a specific resource, date, time, and quantity
 - **Search** — Find resources by name, category, location, availability, condition, or ID (including recursive search)
 - **Booking Lifecycle** — Cancel, reactivate, and update booking status with transition rules
@@ -106,7 +106,7 @@ smart_campus_booking/
 5. Start time must be before end time
 6. Requested quantity must be a positive integer not exceeding total resource quantity
 7. No resource capacity conflict at any point during the requested time slot
-8. Same user cannot have overlapping bookings (even for different resources)
+8. Same user can book multiple different resources during overlapping time slots (each resource validated independently)
 9. Booking duration must not exceed **8 hours** (configurable in `app/config.py`)
 10. Booking purpose is required
 
@@ -147,7 +147,7 @@ Failed Conflict and Invalid attempts are stored in `booking_attempts.json` and d
 | Cancelled | Confirmed, Pending (after revalidation) |
 | Completed | None |
 
-- Reactivating a cancelled booking rechecks date, resource condition/availability, the 8-hour duration limit, capacity, and user conflicts
+- Reactivating a cancelled booking rechecks date, resource condition/availability, the 8-hour duration limit, and resource capacity
 - A booking cannot be marked Completed before its scheduled end time
 - Confirmed and Pending bookings are automatically completed after their end time passes
 

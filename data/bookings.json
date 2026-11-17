@@ -248,7 +248,7 @@
     "end_time": "16:00",
     "purpose": "Faculty presentation",
     "quantity_requested": 1,
-    "status": "Confirmed",
+    "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
   },
   {
@@ -260,7 +260,7 @@
     "end_time": "11:00",
     "purpose": "Student lab",
     "quantity_requested": 3,
-    "status": "Pending",
+    "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
   },
   {
@@ -272,7 +272,7 @@
     "end_time": "12:00",
     "purpose": "Conference session",
     "quantity_requested": 1,
-    "status": "Confirmed",
+    "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
   },
   {
@@ -284,7 +284,7 @@
     "end_time": "16:00",
     "purpose": "Programming workshop",
     "quantity_requested": 1,
-    "status": "Confirmed",
+    "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
   },
   {
@@ -296,7 +296,7 @@
     "end_time": "11:00",
     "purpose": "Lecture recording",
     "quantity_requested": 1,
-    "status": "Confirmed",
+    "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
   },
   {
@@ -308,7 +308,7 @@
     "end_time": "15:00",
     "purpose": "Event sound check",
     "quantity_requested": 2,
-    "status": "Confirmed",
+    "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
   },
   {
@@ -478,5 +478,17 @@
     "quantity_requested": 1,
     "status": "Completed",
     "created_at": "2026-10-29 12:50:30"
+  },
+  {
+    "booking_id": "BK0041",
+    "user_id": "USR0002",
+    "resource_id": "RES0002",
+    "booking_date": "2026-11-19",
+    "start_time": "09:00",
+    "end_time": "10:00",
+    "purpose": "for work",
+    "quantity_requested": 1,
+    "status": "Confirmed",
+    "created_at": "2026-11-17 10:22:05"
   }
 ]
